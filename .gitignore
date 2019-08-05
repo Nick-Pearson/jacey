@@ -1,0 +1,8 @@
+build/
+
+*.obj
+*.log
+*.tmp
+*.class
+*.exe
+*.out
