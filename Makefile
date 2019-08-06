@@ -13,7 +13,7 @@ JAVAC=javac
 SRCS = $(shell find $(S_DIR) -name *.cpp)
 OBJS = $(SRCS:$(S_DIR)/%.cpp=$(B_DIR)/obj/%.o)
 JAVA_SRCS = $(shell find $(JAVA_DIR) -name *.java)
-JAVA_CLASSES = $(JAVA_SRCS:$(JAVA_DIR)/%.java=$(B_DIR)/class/%.class)
+JAVA_CLASSES = $(JAVA_SRCS:$(JAVA_DIR)/%.java=$(B_DIR)/%.class)
 
 MAIN_EXEC = $(B_DIR)/jacey
 
@@ -21,8 +21,11 @@ default: $(MAIN_EXEC)
 compile: $(MAIN_EXEC) $(JAVA_CLASSES)
 clean:
 	rm -r build
+	mkdir -p $(B_DIR)
 
-test: $(JAVA_CLASSES)
+test: $(MAIN_EXEC) $(JAVA_CLASSES)
+	cd $(B_DIR)
+	$(MAIN_EXEC) com.jacey.sample.sample0
 
 #
 # C++ BUILD COMMANDS
@@ -37,6 +40,5 @@ $(B_DIR)/obj/%.o : $(S_DIR)/%.cpp
 #
 # JAVA BUILD COMMANDS
 #
-$(B_DIR)/class/%.class : $(JAVA_DIR)/%.java
-	mkdir -p $(B_DIR)/class
-	$(JAVAC) -d $(B_DIR)/class $<
+$(B_DIR)/%.class : $(JAVA_DIR)/%.java
+	$(JAVAC) -d $(B_DIR) $<
