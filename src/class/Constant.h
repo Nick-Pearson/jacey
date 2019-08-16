@@ -25,3 +25,40 @@ struct Constant
   ConstantType type = ConstantType::INVALID;
   unsigned char* data = nullptr;
 };
+
+const char* constantTypeToString(ConstantType type)
+{
+  switch(type)
+  {
+  case ConstantType::Utf8:
+    return "UTF-8  ";
+  case ConstantType::Integer:
+    return "Integer";
+  case ConstantType::Float:
+    return "Float";
+  case ConstantType::Long:
+    return "Long";
+  case ConstantType::Double:
+    return "Double";
+  case ConstantType::Class:
+    return "Class";
+  case ConstantType::String:
+    return "String";
+  case ConstantType::Fieldref:
+    return "Fieldref";
+  case ConstantType::Methodref:
+    return "Methodref";
+  case ConstantType::InterfaceMethodref:
+    return "IfaceMethodRef";
+  case ConstantType::NameAndType:
+    return "NameAndType";
+  case ConstantType::MethodHandle:
+    return "MethodHandle";
+  case ConstantType::MethodType:
+    return "MethodType";
+  case ConstantType::InvokeDynamic:
+    return "InvokeDynamic";
+  default:
+    return "INVALID";
+  }
+}

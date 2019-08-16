@@ -79,7 +79,7 @@ bool ClassLoader::parseConstant(std::istream& stream, Constant& outConstant)
 {
   stream.read((char*)&outConstant.type, 1);
 
-  std::cout << (unsigned int)outConstant.type;
+  printf("%.20s", constantTypeToString(outConstant.type));
 
   switch (outConstant.type)
   {
@@ -90,7 +90,7 @@ bool ClassLoader::parseConstant(std::istream& stream, Constant& outConstant)
     stream.read(str, length);
     str[length] = '*';
     str[length + 1] = 0;
-    std::cout << " \t= (" << length << ") " << str;
+    std::cout << "= (" << length << ") " << str;
     break;
   }
   case ConstantType::Integer:
@@ -104,7 +104,7 @@ bool ClassLoader::parseConstant(std::istream& stream, Constant& outConstant)
   case ConstantType::Class:
   {
     unsigned short idx = readUShort(stream);
-    std::cout << "\t" << idx;
+    std::cout << idx;
     break;
   }
   case ConstantType::String:
@@ -130,6 +130,7 @@ bool ClassLoader::parseConstant(std::istream& stream, Constant& outConstant)
   }
 
   std::cout << std::endl;
+  return true;
 }
 
 unsigned int ClassLoader::readUInt(std::istream& stream)

@@ -7,10 +7,12 @@ class JClass;
 class ClassLoader
 {
 public:
-
+ 
   JClass* loadClass(const char* classPath);
 
 private:
+
+void newMethod();
 
   JClass* parseClass(std::istream& stream);
 
