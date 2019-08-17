@@ -29,7 +29,7 @@ JClass* ClassLoader::loadClass(const char* classPath)
 
   std::cout << "Loading class from file " << filePath << std::endl;
 
-  std::ifstream stream(filePath);
+  std::ifstream stream(filePath, std::ios::binary);
 
   if (!stream.is_open())
   {
@@ -61,13 +61,14 @@ JClass* ClassLoader::parseClass(std::istream& stream)
     return nullptr;
   }
 
-  unsigned short constantPoolCount = readUShort(stream);
+  unsigned short constantPoolCount = readUShort(stream) - 1;
   std::cout << "Got " << constantPoolCount << " constants" << std::endl;
 
   JClass* c = new JClass{};
 
   for (unsigned short i = 0; i < constantPoolCount; ++i)
   {
+    printf("#%-2d ", i+1);
     Constant constant;
     parseConstant(stream, constant);
   }
@@ -79,18 +80,17 @@ bool ClassLoader::parseConstant(std::istream& stream, Constant& outConstant)
 {
   stream.read((char*)&outConstant.type, 1);
 
-  printf("%.20s", constantTypeToString(outConstant.type));
+  printf("%-14s", constantTypeToString(outConstant.type));
 
   switch (outConstant.type)
   {
   case ConstantType::Utf8:
   {
     unsigned short length = readUShort(stream);
-    char str[length + 2];
+    char str[length + 1];
     stream.read(str, length);
-    str[length] = '*';
-    str[length + 1] = 0;
-    std::cout << "= (" << length << ") " << str;
+    str[length] = 0;
+    std::cout << "(" << length << ") \"" << str << "\"";
     break;
   }
   case ConstantType::Integer:

@@ -31,7 +31,7 @@ clean:
 	rm -r build
 	mkdir -p $(B_DIR)
 
-test-unit: $(MAIN_EXEC) $(JAVA_CLASSES)
+test-integration: $(MAIN_EXEC) $(JAVA_CLASSES)
 	cd $(B_DIR)
 	$(MAIN_EXEC) build.com.jacey.sample.sample0
 
