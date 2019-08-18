@@ -1,83 +1,29 @@
 {
-    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // See https://go.microsoft.com/fwlink/?LinkId=733558 
     // for the documentation about the tasks.json format
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Compile",
-            "type": "process",
-            "command":"/bin/bash",
-            "windows":{
-                "command": "G:/x64/Git/bin/bash.exe"
-            },
-            "args": [
-              "-c",
-              "make compile-all"
-            ],
-
-            // Make this the default build command.
+            "type": "cargo",
+            "subcommand": "build",
             "group": {
                 "kind": "build",
                 "isDefault": true
             },
-
-            // Show the output window only if unrecognized errors occur.
-            "presentation": {
-                "reveal": "always",
-                "panel": "new"
-            },
-
-            // Use the standard less compilation problem matcher.
-            "problemMatcher": {
-                "owner": "cpp",
-                "fileLocation": ["relative", "${workspaceRoot}"],
-                "pattern": {
-                    "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
-                    "file": 1,
-                    "line": 2,
-                    "column": 3,
-                    "severity": 4,
-                    "message": 5
-                }
-            }
+            "problemMatcher": [
+                "$rustc"
+            ]
         },
         {
-            "label": "Integration Tests",
-            "type": "process",
-            "command":"/bin/bash",
-            "windows":{
-                "command": "G:/x64/Git/bin/bash.exe"
-            },
-            "args": [
-              "-c",
-              "make test-integration"
-            ],
-
-            // Make this the default build command.
+            "type": "cargo",
+            "subcommand": "test",
             "group": {
                 "kind": "test",
                 "isDefault": true
             },
-
-            // Show the output window only if unrecognized errors occur.
-            "presentation": {
-                "reveal": "always",
-                "panel": "new"
-            },
-
-            // Use the standard less compilation problem matcher.
-            "problemMatcher": {
-                "owner": "cpp",
-                "fileLocation": ["relative", "${workspaceRoot}"],
-                "pattern": {
-                    "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
-                    "file": 1,
-                    "line": 2,
-                    "column": 3,
-                    "severity": 4,
-                    "message": 5
-                }
-            }
+            "problemMatcher": [
+                "$rustc"
+            ]
         }
     ]
 }
