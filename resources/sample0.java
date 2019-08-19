@@ -1,5 +1,3 @@
-package com.jacey.sample;
-
 public class sample0
 {
   public static void main(String[] args)

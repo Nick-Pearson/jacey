@@ -12,7 +12,12 @@
             },
             "problemMatcher": [
                 "$rustc"
-            ]
+            ],
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated",
+                "clear": true
+            }
         },
         {
             "type": "cargo",
@@ -23,7 +28,12 @@
             },
             "problemMatcher": [
                 "$rustc"
-            ]
+            ],
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated",
+                "clear": true
+            }
         }
     ]
 }
